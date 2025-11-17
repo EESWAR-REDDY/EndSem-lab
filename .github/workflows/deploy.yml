@@ -5,13 +5,14 @@ on:
     branches: [main]
 
 permissions:
+  contents: write
   pages: write
   id-token: write
-  contents: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -26,5 +27,7 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages   # ← 🔥 ADD THIS
     steps:
       - uses: actions/deploy-pages@v4
